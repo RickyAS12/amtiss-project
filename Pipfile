@@ -4,10 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+mysqlclient = '2.2.4'
+SQLAlchemy = '2.0.29'
 
 [dev-packages]
 
 [requires]
 python_version = "3.12"
-mysqlclient = '2.2.4'
-SQLAlchemy = '2.0.29'
+
