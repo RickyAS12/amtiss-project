@@ -9,5 +9,5 @@ name = "pypi"
 
 [requires]
 python_version = "3.12"
-mysqlclient
-SQLAlchemy
+mysqlclient = '2.2.4'
+SQLAlchemy = '2.0.29'
