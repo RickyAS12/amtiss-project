@@ -1,2 +1,2 @@
 mysqlclient
-SQLAlchemy
+sqlalchemy
