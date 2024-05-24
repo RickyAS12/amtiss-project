@@ -1,3 +1,2 @@
-SQLAlchemy
 streamlit
-psycopg2-binary
+google-cloud-bigquery
