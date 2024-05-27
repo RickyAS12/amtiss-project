@@ -264,6 +264,7 @@ with st.container(border=True):
                 x=alt.X('mean_hour_meter_per_date:Q', title='Work Hour'),
                 y=alt.Y('asset_category:N', sort=alt.SortField(field='mean_hour_meter_per_date', order='descending'), title=None),
                 text=alt.Text('number_format:N'),
+                color=alt.value('yellow'),
                 tooltip = [
                     alt.Tooltip('asset_category', title='Category Name'),
                     alt.Tooltip('number_format', title='Average Work Hour'),
