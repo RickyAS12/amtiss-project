@@ -4,7 +4,8 @@ Ini adalah sebuah projek internship untuk perusahaan AMTISS sebagai pihak stakeh
 Kami yang beranggotakan:
 1. Alifina Aulia Azzahra : alifinaauliaa@gmail.com
 2. Ricky Andriadi Sembiring : rickyandriadi12@gmail.com
-, telah menyelesaikan projek pertama yang diberikan pihak AMTISS.
+
+  , telah menyelesaikan projek pertama yang diberikan pihak AMTISS.
 
 Dashboard akan dibagi menjadi 2 halaman:
 1. Halaman pertama, disusun agar user dapat melihat efektifitas dan abnormalitas harga maintenance dengan jam kerja suatu aset maupun suatu kategori.
