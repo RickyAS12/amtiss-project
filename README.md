@@ -12,4 +12,5 @@ Dashboard akan dibagi menjadi 2 halaman:
 2. Halaman kedua, disusun agar user dapat mengetahui aset dengan produk apa saja yang membutuhkan maintenance, menurut rata-rata pemakaian.
 
 Berikut adalah link untuk dapat melihat dashboard nya:
-https://amtiss-project-8mhjyo9qpvmieg4wvcbfmd.streamlit.app/
+
+https://amtiss-project-ezmxkyb6tvs8dzzhagsurs.streamlit.app/
