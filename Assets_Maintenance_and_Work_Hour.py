@@ -239,7 +239,7 @@ with st.container(border=True):
                 x=alt.X('mean_total_price:Q', title='Total Price'),
                 y=alt.Y('asset_category:N', sort=alt.SortField(field='mean_total_price', order='descending'), title=None),
                 text=alt.Text('indonesia_price_format:N'),
-                color=alt.value('green')
+                color=alt.value('green'),
                 tooltip = [
                     alt.Tooltip('asset_category', title='Category Name'),
                     alt.Tooltip('indonesia_price_format', title='Average Total Maintenance Price'),
