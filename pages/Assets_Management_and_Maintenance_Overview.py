@@ -32,7 +32,7 @@ def run_query(query):
 # Query
 # 1.Query for Cost and Hour Meter Trend
 data=run_query(
-    "SELECT * FROM amtiss-dashboard-performance.amtiss_lma.union_hm_gc ORDER BY date"
+    "SELECT * FROM amtiss-dashboard-performance.amtiss_lma.join_hm_gc_c_ass ORDER BY date"
 )
 data = pd.DataFrame(data)
 data['date'] = pd.to_datetime(data['date'])
