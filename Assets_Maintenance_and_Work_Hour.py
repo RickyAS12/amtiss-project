@@ -543,7 +543,7 @@ if disable_filter_asset == False:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -651,7 +651,7 @@ if disable_filter_asset == False:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -759,7 +759,7 @@ if disable_filter_asset == False:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -867,7 +867,7 @@ if disable_filter_asset == False:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -975,7 +975,7 @@ if disable_filter_asset == False:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1104,7 +1104,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1210,7 +1210,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1316,7 +1316,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1422,7 +1422,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1528,7 +1528,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
@@ -1634,7 +1634,7 @@ else:
         # --The label at the top of the bar_chart_2 to help distinguished number faster between bars
         label_bar_chart_2 = bar_chart_2.mark_text(baseline='bottom')
         
-        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Combo Chart')
+        combo = (line_chart_1 + bar_chart_1).resolve_scale(y='independent').properties(title='Asset Maintenance Cost and Hour Meter Trend')
 
         # Layout
         st.altair_chart(combo_line_chart_1, use_container_width=True)
