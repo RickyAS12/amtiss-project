@@ -13,4 +13,4 @@ Dashboard akan dibagi menjadi 2 halaman:
 
 Berikut adalah link untuk dapat melihat dashboard nya:
 
-https://amtiss-project-ezmxkyb6tvs8dzzhagsurs.streamlit.app/
+https://amtiss-project-3qwanqydsz7wadvng9xgtm.streamlit.app/
