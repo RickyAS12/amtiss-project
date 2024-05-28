@@ -7,9 +7,7 @@ Kami yang beranggotakan:
 
   , telah menyelesaikan projek pertama yang diberikan pihak AMTISS.
 
-Dashboard akan dibagi menjadi 2 halaman:
-1. Halaman pertama, disusun agar user dapat melihat efektifitas dan abnormalitas harga maintenance dengan jam kerja suatu aset maupun suatu kategori.
-2. Halaman kedua, disusun agar user dapat mengetahui aset dengan produk apa saja yang membutuhkan maintenance, menurut rata-rata pemakaian.
+Dashboard disusun sedemikian rupa agar user dapat melihat efektifitas dan abnormalitas harga maintenance dengan jam kerja suatu aset maupun suatu kategori.
 
 Berikut adalah link untuk dapat melihat dashboard nya:
 
