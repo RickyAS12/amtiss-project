@@ -441,7 +441,10 @@ if disable_filter_asset == False:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
-        
+
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Weekly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -550,6 +553,9 @@ if disable_filter_asset == False:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Monthly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -657,7 +663,10 @@ if disable_filter_asset == False:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
-        
+
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Quarter':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -766,6 +775,9 @@ if disable_filter_asset == False:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Semester':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -873,7 +885,10 @@ if disable_filter_asset == False:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
-        
+
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Yearly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -982,6 +997,9 @@ if disable_filter_asset == False:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+        
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
 # --Grouped by Categories
 else:
     if option_date == 'by date':
@@ -1110,7 +1128,10 @@ else:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
-        
+
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Weekly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
@@ -1216,7 +1237,10 @@ else:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
-        
+
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Monthly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
@@ -1323,6 +1347,9 @@ else:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Quarter':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
@@ -1429,6 +1456,9 @@ else:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Semester':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
@@ -1535,6 +1565,9 @@ else:
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
 
+            
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
     elif option_date == 'Yearly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
@@ -1640,3 +1673,6 @@ else:
         st.altair_chart(combo_line_chart_1, use_container_width=True)
         st.altair_chart(bar_chart_1 | (bar_chart_2+label_bar_chart_2))
         st.altair_chart(combo, use_container_width=True)
+                
+        st.subheader("Detailed View :")
+        st.dataframe(grouped_df)
