@@ -31,11 +31,11 @@ def run_query(query):
 
 # Query
 # 1.Query for Cost and Hour Meter Trend
-db_search=run_query(
+data=run_query(
     "SELECT * FROM amtiss-dashboard-performance.amtiss_lma.union_hm_gc ORDER BY date"
 )
-db_search = pd.DataFrame(db_search)
-db_search['date'] = pd.to_datetime(db_search['date'])
+data = pd.DataFrame(data)
+data['date'] = pd.to_datetime(data['date'])
 
 st.image('amtiss_logo-bg-white-1.png', width=150)
 
