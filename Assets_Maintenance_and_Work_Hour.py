@@ -666,7 +666,7 @@ if disable_filter_asset == False:
 
             
         st.subheader("Detailed View :")
-        st.table(grouped_df, use_container_width=True)
+        st.table(grouped_df)
     elif option_date == 'Quarter':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
