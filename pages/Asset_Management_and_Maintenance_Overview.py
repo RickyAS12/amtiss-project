@@ -170,7 +170,7 @@ else:
 needed_service_df = filtered_df_st[filtered_df_st['status'] == 'Needed service']
 
 # Count occurrences for needed services
-needed_service_count = needed_service_df.groupby(['asset_category', 'asset_code']).size().reset_index(name='count')
+needed_service_count = needed_service_df.groupby(['asset_category', 'asset_code', 'asset_name']).size().reset_index(name='count')
 
 # Select the asset category to focus on
 if selected_asset_category:
@@ -180,12 +180,19 @@ else:
 
 # Sort and select the top 10 asset codes
 top_10_asset_codes = selected_category_count.sort_values(by='count', ascending=False).head(10)
+top_10_asset_codes = top_10_asset_codes[['asset_category', 'asset_code', 'asset_name', 'count']]
 
 # Plotting the bar chart for the top 10 asset codes using Altair
 bar_chart = alt.Chart(top_10_asset_codes).mark_bar().encode(
     x=alt.X('asset_code', title='Asset Code', sort='-y'),
     y=alt.Y('count', title='Number of Products Needed Service'),
-    color=alt.value('red')
+    color=alt.value('red'),
+    tooltip=[
+        alt.Tooltip('asset_category', title='Asset Category'),
+        alt.Tooltip('asset_code', title='Asset Code'),
+        alt.Tooltip('asset_name', title='Asset Name'),
+        alt.Tooltip('count', title='Number of Products that Needed Service')
+    ]
 )
 
 st.altair_chart(bar_chart, use_container_width=True)
@@ -217,10 +224,12 @@ end_row = start_row + rows_per_page
 st.table(filtered_df_st.iloc[start_row:end_row].reset_index(drop=True))
 
 # Pagination buttons
-col1, col2 = st.columns(2)
+col1, col2, _ = st.columns([2, 2, 6]) 
+
 with col1:
     if st.button('Previous') and st.session_state.current_page > 0:
         st.session_state.current_page -= 1
+
 with col2:
     if st.button('Next') and end_row < total_rows:
         st.session_state.current_page += 1
