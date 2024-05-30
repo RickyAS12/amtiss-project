@@ -445,7 +445,7 @@ if disable_filter_asset == False:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Weekly':
+.reset_index(drop=True)    elif option_date == 'Weekly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
         
@@ -556,7 +556,7 @@ if disable_filter_asset == False:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Monthly':
+.reset_index(drop=True)    elif option_date == 'Monthly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
         
@@ -666,7 +666,7 @@ if disable_filter_asset == False:
 
             
         st.subheader("Detailed View :")
-        st.table(grouped_df)
+        st.dataframe(grouped_df.reset_index(drop=True), use_container_width=True)
     elif option_date == 'Quarter':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
@@ -778,7 +778,7 @@ if disable_filter_asset == False:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Semester':
+.reset_index(drop=True)    elif option_date == 'Semester':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
         
@@ -889,7 +889,7 @@ if disable_filter_asset == False:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Yearly':
+.reset_index(drop=True)    elif option_date == 'Yearly':
         db_search_filtered = db_search[db_search['asset_code'].isin(option_asset)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_code', 'date'], ascending=[True, True])
         
@@ -1001,7 +1001,7 @@ if disable_filter_asset == False:
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
 # --Grouped by Categories
-else:
+.reset_index(drop=True)else:
     if option_date == 'by date':
         # --make a new dataframe for the filtered dataframe called db_search_filtered
         if len(date_range) == 2:
@@ -1132,7 +1132,7 @@ else:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Weekly':
+.reset_index(drop=True)    elif option_date == 'Weekly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
         
@@ -1241,7 +1241,7 @@ else:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Monthly':
+.reset_index(drop=True)    elif option_date == 'Monthly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
         
@@ -1350,7 +1350,7 @@ else:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Quarter':
+.reset_index(drop=True)    elif option_date == 'Quarter':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
         
@@ -1459,7 +1459,7 @@ else:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Semester':
+.reset_index(drop=True)    elif option_date == 'Semester':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
         
@@ -1568,7 +1568,7 @@ else:
             
         st.subheader("Detailed View :")
         st.dataframe(grouped_df, use_container_width=True)
-    elif option_date == 'Yearly':
+.reset_index(drop=True)    elif option_date == 'Yearly':
         db_search_filtered = db_search[db_search['asset_category'].isin(option_category)]
         db_search_filtered = db_search_filtered.sort_values(by=['asset_category', 'date'], ascending=[True, True])
         
@@ -1675,4 +1675,4 @@ else:
         st.altair_chart(combo, use_container_width=True)
                 
         st.subheader("Detailed View :")
-        st.dataframe(grouped_df, use_container_width=True)
+ .reset_index(drop=True)       st.dataframe(grouped_df, use_container_width=True)
