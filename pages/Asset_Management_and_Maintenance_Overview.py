@@ -221,7 +221,7 @@ start_row = st.session_state.current_page * rows_per_page
 end_row = start_row + rows_per_page
 
 # Display the current page of data with reset index
-st.table(filtered_df_st.iloc[start_row:end_row].reset_index(drop=True))
+st.dataframe(filtered_df_st.iloc[start_row:end_row].reset_index(drop=True))
 
 # Pagination buttons
 col1, col2, _ = st.columns([2, 2, 6]) 
