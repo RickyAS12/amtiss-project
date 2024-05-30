@@ -2,19 +2,55 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
+from google.oauth2 import service_account
+from google.cloud import bigquery
 
-st.title('Asset Management and Maintenance Overview')
+if 'sbstate' not in st.session_state:
+    st.session_state.sbstate = 'collapsed'
+    
+# Set Overall Page Layout
+st.set_page_config(
+    page_title='Dashboard',
+    layout='wide',
+    initial_sidebar_state=st.session_state.sbstate
+)
 
+# st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.write("The data used in this are assets' products that are registered in either the assignment, good_consume, or hm_record datasets.")
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = bigquery.Client(credentials=credentials)
+
+@st.cache_data(ttl=600)
+def run_query(query):
+    query_job = client.query(query)
+    rows_raw = query_job.result()
+    # Convert to list of dicts. Required for st.cache_data to hash the return value.
+    rows = [dict(row) for row in rows_raw]
+    return rows
+
+st.image('amtiss_logo-bg-white-1.png', width=150)
+
+st.markdown("<h1 style='text-align: center; color: black;'>Asset Management and Maintenance Overview</h1>", unsafe_allow_html=True)
+st.write('')
+st.write('')
+st.write('')
+
+st.info("The data used in this are assets' products that are registered in either the assignment, good_consume, or hm_record datasets.")
+
+data=run_query(
+    "SELECT source, asset_category, asset_code, total_hour_meter, date, asset_name, product_id, product_name, product_bought_qty, total_price, consume_id_good_consume, consume_id_assignment, report_date, due_date, fix_hm_record FROM amtiss-dashboard-performance.amtiss_lma.join_hm_gc_c_ass ORDER BY date"
+)
+data = pd.DataFrame(data)
 
 # Load the necessary columns from the data
-data = pd.read_csv('product_data.csv', usecols=[
-    'source', 'asset_category', 'asset_code', 'total_hour_meter', 'date',
-    'asset_name', 'product_id', 'product_name', 'product_bought_qty',
-    'total_price', 'consume_id_good_consume', 'consume_id_assignment', 'report_date', 'due_date', 'fix_hm_record'
-])
-
+# data = pd.read_csv('product_data.csv', usecols=[
+#     'source', 'asset_category', 'asset_code', 'total_hour_meter', 'date',
+#     'asset_name', 'product_id', 'product_name', 'product_bought_qty',
+#     'total_price', 'consume_id_good_consume', 'consume_id_assignment', 'report_date', 'due_date', 'fix_hm_record'
+# ])
 
 # Process 'hm_record' data
 hm_data = data[data['source'] == 'hm_record'][['asset_category', 'asset_code', 'total_hour_meter', 'date']]
