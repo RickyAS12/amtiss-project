@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
+# import re
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.cluster import KMeans
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
@@ -67,8 +70,69 @@ gc_data = data[data['source'] == 'good_consume'][[
 # Replace NaN values in 'asset_category' with "Unknown Category"
 gc_data['asset_category'] = gc_data['asset_category'].fillna('Unknown Category')
 
+# To apply machine learning, uncomment the code below :
+# List of brand names to exclude
+# brand_names = ['toyota', 'mitsubishi', 'hino', 'dongfeng', 'mazda', 'ford', 'hilux', 
+#                'suzuki', 'triton', 'strada', 'dutro', 'bridgestone', 'innova', 'avanza', 
+#                'luxio', 'liugong', 'yukimura', 'weichai']
+
+# Preprocess the product names
+# def preprocess(text):
+#     text = re.sub(r'\b\w*\d\w*\b', '', text)  # Remove words containing digits
+#     for brand in brand_names:
+#         text = re.sub(r'\b' + re.escape(brand) + r'\b', '', text, flags=re.IGNORECASE)  # Remove brand names
+#     text = re.sub(r'[^a-zA-Z\s]', '', text)  # Remove special characters
+#     text = re.sub(r'\s+', ' ', text).strip()  # Remove extra spaces
+#     return text
+
+# Apply preprocessing to product names
+# gc_data['cleaned_product_name'] = gc_data['product_name'].apply(preprocess)
+# gc_data['cleaned_product_name'] = gc_data['cleaned_product_name'].apply(lambda x: ' '.join(x.split()[:2]))
+
+# Separate single-word and multi-word product names
+# single_word_df = gc_data[gc_data['cleaned_product_name'].str.split().str.len() == 1].copy()
+# multi_word_df = gc_data[gc_data['cleaned_product_name'].str.split().str.len() > 1].copy()
+
+# Process multi-word product names with TF-IDF and KMeans
+# vectorizer = TfidfVectorizer(ngram_range=(1, 1))
+# X = vectorizer.fit_transform(multi_word_df['cleaned_product_name'])
+
+# kmeans = KMeans(n_clusters=1000, random_state=0)  # Adjust n_clusters based on your needs
+# kmeans.fit(X)
+
+# Determine cluster labels based on the top 2 most common terms
+# terms = vectorizer.get_feature_names_out()
+# order_centroids = kmeans.cluster_centers_.argsort()[:, ::-1]
+
+# cluster_labels = []
+
+# for i in range(kmeans.n_clusters):
+#     top_terms = sorted(list(set(terms[ind] for ind in order_centroids[i, :2])))[::-1]   # Select only the top 2 terms and sort them
+#     cluster_labels.append(' '.join(top_terms))
+
+# Map cluster numbers to cluster labels
+# cluster_label_map = dict(enumerate(cluster_labels))
+# multi_word_df['product_subcategory'] = [cluster_label_map[label] for label in kmeans.labels_]
+
+# Assign single-word product names their own cluster labels
+# single_word_df['product_subcategory'] = single_word_df['cleaned_product_name']
+
+# Combine results
+# gc_data = pd.concat([single_word_df, multi_word_df])
+
+# Ensure cluster_label is consistent with desired output format
+# gc_data['product_subcategory'] = gc_data['product_subcategory'].astype(str)
+# gc_data['product_subcategory'] = gc_data['product_subcategory'].str.upper()
+
+# Drop the 'cleaned_product_name' column
+# gc_data.drop('cleaned_product_name', axis=1, inplace=True)
+
+# Optional: Reset index if necessary
+# gc_data.reset_index(drop=True, inplace=True)
+
 gc_agg = gc_data.groupby([
-    'asset_category', 'asset_code', 'asset_name', 'product_id', 'product_name', 'date', 'consume_id_good_consume'
+    'asset_category', 'asset_code', 'asset_name', 'product_id', # 'product_subcategory',
+    'product_name', 'date', 'consume_id_good_consume'
 ]).agg({
     'product_bought_qty': 'sum',
     'total_price': 'sum'
@@ -85,23 +149,29 @@ merged_df['asset_used_at'] = pd.to_datetime(merged_df['asset_used_at'], errors='
 
 # Filter and sort data
 filtered_df = merged_df[merged_df['due_date'] == merged_df['asset_used_at']].copy()
-filtered_df = filtered_df.sort_values(by=['asset_category', 'asset_code', 'asset_name', 'product_id', 'due_date'])
+filtered_df = filtered_df.sort_values(by=['asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+                                          'product_id', 'due_date'])
 
 # Calculate 'serviced_when'
-filtered_df['serviced_when'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', 'product_id'])['fix_hm_record'].diff()
-min_hour_meter = merged_df.groupby(['asset_category', 'asset_code', 'asset_name', 'product_id'])['fix_hm_record'].transform('min')
+filtered_df['serviced_when'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+                                                    'product_id'])['fix_hm_record'].diff()
+min_hour_meter = merged_df.groupby(['asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+                                    'product_id'])['fix_hm_record'].transform('min')
 filtered_df['serviced_when'] = filtered_df.apply(
     lambda row: row['fix_hm_record'] - min_hour_meter[row.name] if pd.isnull(row['serviced_when']) else row['serviced_when'],
     axis=1
 )
 
 # Calculate average 'serviced_when' and service count
-filtered_df['avg_serviced_when'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', 'product_id'])['serviced_when'].transform('mean').round()
-filtered_df['service_count'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', 'product_id'])['due_date'].transform('count')
+filtered_df['avg_serviced_when'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+                                                        'product_id'])['serviced_when'].transform('mean').round()
+filtered_df['service_count'] = filtered_df.groupby(['asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+                                                    'product_id'])['due_date'].transform('count')
 
 # Aggregate final data
 df_new = filtered_df.groupby([
-    'asset_category', 'asset_code', 'asset_name', 'product_name', 'service_count', 'consume_id_good_consume'
+    'asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+    'product_name', 'service_count', 'consume_id_good_consume'
 ], as_index=False).agg({
     'avg_serviced_when': 'mean'
 }).rename(columns={'avg_serviced_when': 'avg_service'})
@@ -140,8 +210,10 @@ df_new.dropna(how='all', inplace=True)
 
 # Final DataFrame
 df_final = df_new[[
-    'asset_category', 'asset_code', 'asset_name', 'product_name', 'status', 'service_count',
-    'latest_product_maintained_at', 'maintained_hour_meter','latest_asset_used_at', 'latest_used_hour_meter','avg_service', 'hours_after_maintained'
+    'asset_category', 'asset_code', 'asset_name', # 'product_subcategory',
+    'product_name', 'status', 'service_count',
+    'latest_product_maintained_at', 'maintained_hour_meter','latest_asset_used_at', 
+    'latest_used_hour_meter','avg_service', 'hours_after_maintained'
 ]]
 
 
@@ -157,15 +229,45 @@ else:
 
 selected_asset_code = st.multiselect('Asset Code', asset_codes, default=[])
 
-if selected_asset_category and selected_asset_code:
-    filtered_df_st = df_final[(df_final['asset_category'].isin(selected_asset_category)) & 
-                              (df_final['asset_code'].isin(selected_asset_code))]
+# Add filter for product_subcategory based on selected asset_category and asset_code
+# if selected_asset_category and selected_asset_code:
+#     filtered_subcategories = df_final[(df_final['asset_category'].isin(selected_asset_category)) & 
+#                                       (df_final['asset_code'].isin(selected_asset_code))]
+#     product_subcategories = filtered_subcategories['product_subcategory'].unique()
+# elif selected_asset_category:
+#     filtered_subcategories = df_final[df_final['asset_category'].isin(selected_asset_category)]
+#     product_subcategories = filtered_subcategories['product_subcategory'].unique()
+# elif selected_asset_code:
+#     filtered_subcategories = df_final[df_final['asset_code'].isin(selected_asset_code)]
+#     product_subcategories = filtered_subcategories['product_subcategory'].unique()
+# else:
+#     product_subcategories = df_final['product_subcategory'].unique()
+
+# selected_product_subcategory = st.multiselect('Product Subcategory', product_subcategories, default=[])
+
+# Filter the DataFrame based on selected filters
+if selected_asset_category and selected_asset_code: # and selected_product_subcategory:
+    filtered_df = df_final[(df_final['asset_category'].isin(selected_asset_category)) & 
+                           (df_final['asset_code'].isin(selected_asset_code))] # & 
+                           # (df_final['product_subcategory'].isin(selected_product_subcategory))]
+elif selected_asset_category and selected_asset_code:
+    filtered_df = df_final[(df_final['asset_category'].isin(selected_asset_category)) & 
+                           (df_final['asset_code'].isin(selected_asset_code))]
+elif selected_asset_category: # and selected_product_subcategory:
+    filtered_df = df_final[(df_final['asset_category'].isin(selected_asset_category))] # & 
+                           # (df_final['product_subcategory'].isin(selected_product_subcategory))]
+elif selected_asset_code: # and selected_product_subcategory:
+    filtered_df = df_final[(df_final['asset_code'].isin(selected_asset_code))] # & 
+                           # (df_final['product_subcategory'].isin(selected_product_subcategory))]
 elif selected_asset_category:
-    filtered_df_st = df_final[df_final['asset_category'].isin(selected_asset_category)]
+    filtered_df = df_final[df_final['asset_category'].isin(selected_asset_category)]
 elif selected_asset_code:
-    filtered_df_st = df_final[df_final['asset_code'].isin(selected_asset_code)]
+    filtered_df = df_final[df_final['asset_code'].isin(selected_asset_code)]
+# elif selected_product_subcategory:
+#     filtered_df = df_final[df_final['product_subcategory'].isin(selected_product_subcategory)]
 else:
-    filtered_df_st = df_final
+    filtered_df = df_final
+
 
 # Filter for products with status 'Needed Service'
 needed_service_df = filtered_df_st[filtered_df_st['status'] == 'Needed service']
