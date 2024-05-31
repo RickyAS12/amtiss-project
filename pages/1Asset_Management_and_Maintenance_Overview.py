@@ -196,6 +196,8 @@ bar_chart = alt.Chart(top_10_asset_codes).mark_bar().encode(
     ]
 )
 
+st.write("### Top 10 Assets with Highest Number of Products in 'Needed Service' Status")
+
 st.altair_chart(bar_chart, use_container_width=True)
 
 st.write("### Detailed Asset Information")
