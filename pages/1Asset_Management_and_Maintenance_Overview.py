@@ -18,6 +18,17 @@ st.set_page_config(
     initial_sidebar_state=st.session_state.sbstate
 )
 
+def set_global_exception_handler(f):
+    import sys
+    script_runner = sys.modules["streamlit.runtime.scriptrunner.script_runner"]
+    script_runner.handle_uncaught_app_exception.__code__ = f.__code__
+
+def exception_handler(e):
+    # st.error(f"Oops, something funny happened with a {type(e).__name__}")
+    st.error(f"Oops, looks like an error has comes up. Logging the developer right now. Thank you")
+
+set_global_exception_handler(exception_handler)
+
 # st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # Create API client.
