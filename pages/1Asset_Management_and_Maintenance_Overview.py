@@ -270,7 +270,7 @@ else:
 
 
 # Filter for products with status 'Needed Service'
-needed_service_df = filtered_df_st[filtered_df_st['status'] == 'Needed service']
+needed_service_df = filtered_df[filtered_df['status'] == 'Needed service']
 
 # Count occurrences for needed services
 needed_service_count = needed_service_df.groupby(['asset_category', 'asset_code', 'asset_name']).size().reset_index(name='count')
@@ -309,7 +309,7 @@ status_order = ['Needed service', 'Incoming Service', 'Good condition',  'Produc
 selected_statuses = st.multiselect('Filter by Status', status_order, default=status_order)
 
 # Apply status filter
-filtered_df_st = filtered_df_st[filtered_df_st['status'].isin(selected_statuses)]
+filtered_df = filtered_df[filtered_df['status'].isin(selected_statuses)]
 
 # Pagination settings
 rows_per_page = 20
@@ -317,7 +317,7 @@ if 'current_page' not in st.session_state:
     st.session_state.current_page = 0
 
 # Pagination controls
-total_rows = len(filtered_df_st)
+total_rows = len(filtered_df)
 total_pages = (total_rows // rows_per_page) + (total_rows % rows_per_page > 0)
 
 st.write(f'Total rows: {total_rows}, Total pages: {total_pages}')
@@ -326,7 +326,7 @@ start_row = st.session_state.current_page * rows_per_page
 end_row = start_row + rows_per_page
 
 # Display the current page of data with reset index
-st.dataframe(filtered_df_st.iloc[start_row:end_row].reset_index(drop=True))
+st.dataframe(filtered_df.iloc[start_row:end_row].reset_index(drop=True))
 
 # Pagination buttons
 col1, col2, _ = st.columns([2, 2, 6]) 
